@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box-sizing</title><!DOCTYPE html>
-<html>
-<head>
+    <meta property="og:url" content="https://gracibrea.github.io/Box-sizing/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Box-sizing">
+    <meta property="description" content="Compreendendo o poder do box-sizing.">
+    <title>Box-sizing</title>
 <style> 
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-left: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 5px 20px;
+    border: solid rgba(0, 0, 0, 0.062) 1px;
+    border-radius: 20px;
+    box-shadow: .5px 1px 10px .5px rgba(0, 0, 0, 0.356);
 }
 #exemplo1 {
     box-sizing: content-box;  
@@ -45,72 +54,43 @@
 </head>
 <body>
 
-<h1>Propriedade box-sizing</h1>
-<p>Define como é calculada a lardura e a altura de um elemento, tenham eles padding e border incluso, ou não.</p>
+<div class="container">
+    <h1>Propriedade box-sizing</h1>
+    <p>A propriedade box-sizing no CSS3 define como é calculada dimensão (largura e altura) de um elemento, tenha ele padding e border incluso, ou não.</p>
+    
+    <h2>box-sizing: content-box (padrão):</h2>
+    <p>O parâmetro content-box aplica a largura apenas ao conteúdo do elemento, sem considerar demais propriedades como padding e margin.</p>
+    <p>Sendo assim, soma-se à largura os parâmetros de padding e border estabelecidos.</p>
+    <p>Logo, a largura estabelecida sofrerá interferência!</p>
+    <pre><code>
+        #exemplo1 {
+            box-sizing: content-box;
+            width: 300px;
+            padding: 30px;
+            border: 10px solid blue;
+        }
+    </pre></code>
+    
+    <div id="exemplo1"><h2>Exemplo 1</h2><p>Essa div tem largura de 300px.</p> <p>Mas a largura total é de 300px + 20px (de borda esquerda e direira) + 60px (de padding na direira e na esquerda) = 380px!</p></div>
+    
+    <h2>box-sizing: border-box:</h2>
+    <p>Já na aplicação do parâmetro border-box, a largura é aplicada a todas as partes do elemento: conteúdo, padding e bordas, que se ajustarão dentro da box.</p>
+    <p>A largura estabelecida é a largura que você terá!</p>
+    <pre><code>
+        #exemplo2 {
+            box-sizing: border-box;
+            width: 300px;
+            height: 300px;
+            padding: 30px;
+            border: 10px solid blue;
+        }
+    </code></pre>
+    
+    <div id="exemplo2"><h2>Exemplo 2</h2><p>Aqui, a largura total é 300px, independente de qualquer coisa!</p></div>
 
-<h2>box-sizing: content-box (padrão):</h2>
-<p>A largura é aplicada apenas ao conteúdo do elemento:</p>
-<p>Sendo assim, soma-se à largura os parâmetros de padding e border estabelecidos.</p>
-<pre><code>    
-    #exemplo1 {
-        box-sizing: content-box;  
-        width: 300px;
-        padding: 30px;  
-        border: 10px solid blue;
-    }
-</pre></code>
+    <h3><a href="box-sizing-universal.html">Box-sizing universal</a></h3>
+</div>
 
-<div id="exemplo1"><h2>Exemplo 1</h2><p>Essa div tem largura de 300px.</p> <p>Mas a largura total é de 300px + 20px (de borda esquerda e direira) + 60px (de padding na direira e na esquerda) = 380px!</p></div>
-
-<h2>box-sizing: border-box:</h2>
-<p>A largura é aplicada a todas as partes do elemento: conteúdo, padding e bordas:</p>
-<pre><code>    
-    #exemplo2 {
-        box-sizing: border-box;
-        width: 300px;
-        height: 300px;
-        padding: 30px;  
-        border: 10px solid blue;
-    }
-</code></pre>
-
-<div id="exemplo2"><h2>Exemplo 2</h2><p>Aqui, a largura total é 300px, independente de qualquer coisa!</p></div>
-
-<h1>Box-sizing universal</h1>
-
-<p>Uma vez que o resultado do uso do "box-sizing: border-box" é muito melhor, muitos desenvolvedores querem que todos os elementos em suas páginas operem dessa forma.
-<p>O primeiro estilo no head assegura que todos os elementos estão dimensionados de forma mais intuitiva.
-
-<pre><code>    
-* {
-    box-sizing: border-box;
-}
-
-#exemplo3 {
-    width: 300px;
-    height: 300px;
-    padding: 40px;
-    border: 5px solid blue;
-}
-
-#exemplo4 {
-    width: 300px;
-    height: 300px;
-    padding: 10px;
-    border: 5px solid red;
-}   
-</pre></code>
-</p>
-
-<div id="exemplo3"><h2>Exemplo 3</h2>Essa div tem largura total de 300px, independente de padding e/ou border!</div>
-
-<br>
-<div id="exemplo4"><h2>Exemplo 4</h2>Essa div também tem largura total de 300px, independente de padding e/ou border!</div>
-
-<p>
-    A largura e altura (ou só altura, ou só largura) estabelecidas é o que você terá, sem necessidade de matemática mental e de administrar a complexidade de larguras de multiplas propriedades.
-    Fazer essa aplicação em todos os elementos é seguro e inteligente:
-</p>
 
 </body>
 </html>
